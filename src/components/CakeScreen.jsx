@@ -205,25 +205,46 @@ export default function CakeScreen({ onBlown, onNext }) {
 
   return (
     <div className="fullscreen-center-wrapper">
-
-      {/* Top magical text */}
-
-      {/* ── CAKE STRUCTURE ── */}
       <div className="cake-wrapper" title="Click a candle to blow it out!">
         <div className="cake">
-
           {/* CANDLES — 3 tall gold candles on top */}
           <div className="candles">
-            <div className="candle"  onClick={handleCandleClick}>
-              {!isBlown && <div className="flame" />}
+            <div className="candle" onClick={handleCandleClick}>
+              {!isBlown ? (
+                <div className="flame" />
+              ) : (
+                <div className="blow-effect">
+                  <span className="smoke smoke-1"></span>
+                  <span className="smoke smoke-2"></span>
+                  <span className="smoke smoke-3"></span>
+                </div>
+              )}
               <div className="candle-body" />
             </div>
-            <div className="candle"  onClick={handleCandleClick}>
-              {!isBlown && <div className="flame" />}
+
+            <div className="candle" onClick={handleCandleClick}>
+              {!isBlown ? (
+                <div className="flame" />
+              ) : (
+                <div className="blow-effect">
+                  <span className="smoke smoke-1"></span>
+                  <span className="smoke smoke-2"></span>
+                  <span className="smoke smoke-3"></span>
+                </div>
+              )}
               <div className="candle-body" />
             </div>
-            <div className="candle"  onClick={handleCandleClick}>
-              {!isBlown && <div className="flame" />}
+
+            <div className="candle" onClick={handleCandleClick}>
+              {!isBlown ? (
+                <div className="flame" />
+              ) : (
+                <div className="blow-effect">
+                  <span className="smoke smoke-1"></span>
+                  <span className="smoke smoke-2"></span>
+                  <span className="smoke smoke-3"></span>
+                </div>
+              )}
               <div className="candle-body" />
             </div>
           </div>
@@ -253,25 +274,33 @@ export default function CakeScreen({ onBlown, onNext }) {
         </div>
       </div>
 
-      {/* Instruction */}
       {!isBlown && (
-        <p className="instruction-text"> 
-        Close your eyes, make a wish & blow out the candles  🌬️ 🎂✨ </p>
-      )}
-
-      {/* ── HAPPY BIRTHDAY SWEETHEART TEXT ── */}
-      {isBlown && (
-      <div className="romantic-greeting-container">
+        <p className="instruction-text">
+          Close your eyes, make a wish & blow out the candles 🌬️ 🎂✨
+        </p>
         
-        <h1 className="sweetheart-text">Alles Gute zum Geburtstag, Sanchana! 💐💖 </h1>
-
-      </div>
-
       )}
 
-      {/* Next button — appears after candle blown */}
+      {!isBlown && (
+        <p className="instruction-subtext">
+          Click the candle to blow it out!
+        </p>
+      )}
+
       {isBlown && (
-        <button className="btn-romantic" style={{ marginTop: '2rem', maxWidth: '325px' }} onClick={onNext}>
+        <div className="romantic-greeting-container">
+          <h1 className="sweetheart-text">
+            Alles Gute zum Geburtstag, Sanchana! 💐💖
+          </h1>
+        </div>
+      )}
+
+      {isBlown && (
+        <button
+          className="btn-romantic"
+          style={{ marginTop: '2rem', maxWidth: '325px' }}
+          onClick={onNext}
+        >
           Something special has been waiting for you 💌, Open it 💫
         </button>
       )}

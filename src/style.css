@@ -301,11 +301,17 @@ body::-webkit-scrollbar-thumb:hover {
 
 .footer-message {
   font-family: var(--font-cursive);
-  font-size: 1.45rem;
+  font-style: italic;
+  font-size: 1.8rem;
   color: #ffd6e7;
   text-shadow: 0 0 12px rgba(255, 94, 132, 0.18);
+  word-spacing: 6px;
 }
-
+.footer-first-letter {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.2em;
+}
 
 /* ==========================================================================
    COMPONENT-SPECIFIC STYLES
@@ -651,6 +657,7 @@ body::-webkit-scrollbar-thumb:hover {
   z-index: 5;
 }
 
+
 /* Top tier stickers */
 .sticker-tl { top: 14px; left: 15%; }
 .sticker-tr { top: 14px; right: 12%; }
@@ -758,16 +765,10 @@ body::-webkit-scrollbar-thumb:hover {
   width: 14px !important;
   height: 90px !important;
   background: linear-gradient(180deg,
-    #fff9c4 0%,
-    #fde047 20%,
-    #facc15 50%,
-    #d97706 80%,
-    #b45309 100%) !important;
-  border-radius: 7px 7px 4px 4px !important;
+    #fffdf2 0%, #ffe9a8 45%, #fbbf24 100%) !important;
+  border-radius: 12px !important;
   box-shadow:
-    inset 2px 0 4px rgba(255,255,255,0.4),
-    inset -2px 0 4px rgba(0,0,0,0.15),
-    0 4px 12px rgba(180, 83, 9, 0.4) !important;
+    inset 0 10px 0 rgba(255, 255, 255, 0.35), 0 4px 10px rgba(0, 0, 0, 0.12) !important;
 }
 
 /* Flame on top of each candle */
@@ -793,6 +794,240 @@ body::-webkit-scrollbar-thumb:hover {
   50%  { transform: scaleX(1.1) scaleY(0.95) rotate(-1deg); opacity: 1;    }
   75%  { transform: scaleX(0.95)scaleY(1.08) rotate(2deg);  opacity: 0.9;  }
   100% { transform: scaleX(1)   scaleY(1)    rotate(0deg);  opacity: 1;    }
+}
+
+.blow-effect {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 40px;
+  height: 42px;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.smoke {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(220, 220, 220, 0.45) 45%,
+    rgba(180, 180, 180, 0.05) 100%
+  );
+  filter: blur(1px);
+  opacity: 0;
+  transform: translateX(-50%) scale(0.35);
+  animation: smokeRise 1.5s ease-out forwards;
+}
+
+.smoke-1 {
+  animation-delay: 0.4s;
+}
+
+.smoke-2 {
+  margin-left: -10px;
+  animation-delay: 0.70s;
+}
+
+.smoke-3 {
+  margin-left: 10px;
+  animation-delay: 0.85s;
+}
+
+@keyframes smokeRise {
+  0% {
+    opacity: 0.75;
+    transform: translateX(-50%) translateY(0) scale(0.35);
+  }
+  35% {
+    opacity: 0.55;
+    transform: translateX(-60%) translateY(-10px) scale(0.8);
+  }
+  70% {
+    opacity: 0.28;
+    transform: translateX(-42%) translateY(-22px) scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-55%) translateY(-34px) scale(1.45);
+  }
+}
+
+.flame {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  width: 12px;
+  height: 24px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  background: radial-gradient(circle at 50% 20%, #fff5a0 0%, #ffae33 45%, #ff5833 100%);
+  filter: drop-shadow(0 0 10px rgba(255, 144, 64, 0.55));
+  transform: translateX(-50%);
+  transform-origin: 50% 100%;
+  animation: flicker 0.85s ease-in-out infinite;
+  z-index: 8;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-2deg) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) rotate(2deg) scale(0.92);
+  }
+}
+
+.flame-out {
+  animation: blowOut 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes blowOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 10px rgba(255, 144, 64, 0.55));
+  }
+  35% {
+    opacity: 1;
+    transform: translateX(-38%) rotate(22deg) scale(1.05, 0.82);
+    filter: drop-shadow(6px 0 10px rgba(255, 144, 64, 0.45));
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateX(-22%) rotate(34deg) scale(0.7, 0.4);
+    filter: drop-shadow(8px 0 8px rgba(255, 144, 64, 0.2));
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-8%) rotate(42deg) scale(0.15, 0.08);
+    filter: drop-shadow(0 0 0 rgba(255, 144, 64, 0));
+  }
+}
+
+.blow-smoke {
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  width: 48px;
+  height: 56px;
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 9;
+}
+
+.smoke {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(
+    closest-side circle,
+    rgba(255, 255, 255, 0.92),
+    rgba(220, 220, 220, 0.72),
+    rgba(170, 170, 170, 0.30),
+    rgba(120, 120, 120, 0)
+  );
+  filter: blur(3px);
+}
+
+.puff-1 {
+  width: 20px;
+  height: 20px;
+  animation: smokeDrift1 1.2s ease-out forwards;
+}
+
+.puff-2 {
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  animation: smokeDrift2 1.6s ease-out 0.08s forwards;
+}
+
+.puff-3 {
+  width: 18px;
+  height: 18px;
+  margin-left: 12px;
+  animation: smokeDrift3 1.9s ease-out 0.14s forwards;
+}
+
+.trail {
+  width: 18px;
+  height: 34px;
+  margin-left: 2px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(230, 230, 230, 0.58) 0%,
+    rgba(200, 200, 200, 0.30) 45%,
+    rgba(120, 120, 120, 0) 100%
+  );
+  animation: smokeTrail 1.5s ease-out forwards;
+}
+
+@keyframes smokeDrift1 {
+  0% {
+    opacity: 0.95;
+    transform: translateX(-50%) translateY(0) scale(0.45);
+  }
+  40% {
+    opacity: 0.72;
+    transform: translateX(-70%) translateY(-12px) scale(0.95);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%) translateY(-38px) scale(1.7);
+  }
+}
+
+@keyframes smokeDrift2 {
+  0% {
+    opacity: 0.90;
+    transform: translateX(-50%) translateY(0) scale(0.42);
+  }
+  45% {
+    opacity: 0.68;
+    transform: translateX(-38%) translateY(-16px) scale(1.02);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-18%) translateY(-40px) scale(1.75);
+  }
+}
+
+@keyframes smokeDrift3 {
+  0% {
+    opacity: 0.82;
+    transform: translateX(-50%) translateY(0) scale(0.38);
+  }
+  45% {
+    opacity: 0.58;
+    transform: translateX(-58%) translateY(-12px) scale(0.90);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-42%) translateY(-32px) scale(1.45);
+  }
+}
+
+@keyframes smokeTrail {
+  0% {
+    opacity: 0.55;
+    transform: translateX(-50%) translateY(0) scale(0.45, 0.7);
+  }
+  50% {
+    opacity: 0.34;
+    transform: translateX(-60%) translateY(-16px) scale(0.90, 1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-78%) translateY(-34px) scale(1.2, 1.5);
+  }
 }
 
 /* ── HAPPY BIRTHDAY SWEETHEART TEXT ── */
@@ -848,13 +1083,21 @@ body::-webkit-scrollbar-thumb:hover {
 /* --- Instruction text Typography --- */
 .instruction-text {
   margin-top: 24px;
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
+  font-family: var(--font-sherif);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: #f7d24b;
+  white-space: normal;
+  display: inline-block;
+  margin: 0;
+  opacity: 1;
+  text-shadow: 
+    0 0 20px rgba(255, 94, 132, 0.35),
+    0 4px 10px rgba(26, 10, 48, 0.25);
   background: linear-gradient(90deg, #f472b6, #c084fc, #fb923c, #f472b6);
 
   background-size: 300% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+
   background-clip: text;
   animation: shimmerText 3s linear infinite, pulse 2s ease-in-out infinite;
   text-align: center;
@@ -864,6 +1107,13 @@ body::-webkit-scrollbar-thumb:hover {
 @keyframes shimmerText {
   0%   { background-position: 0% center; }
   100% { background-position: 300% center; }
+}
+
+.instruction-subtext{
+  font-family: var(--font-serif);
+  margin-top: 10px;
+  font-size: 0.7rem;
+  text-align: center
 }
 
 .btn-romantic {
@@ -1772,7 +2022,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 .sweetheart-text {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Great Vibes', serif;
   font-size: clamp(2rem, 7vw, 3.5rem);
   font-weight: 700;
   color: #ff5e84;
@@ -2302,8 +2552,9 @@ body::-webkit-scrollbar-thumb:hover {
 
 .countdown-unlocking {
   font-family: var(--font-serif);
+  font-style: italic;
   font-size: 1.3rem;
-  color: #fbbf24;
+  color: #f8d432;
   animation: pulse 1.2s ease-in-out infinite;
 }
 

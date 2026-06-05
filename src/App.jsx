@@ -27,14 +27,21 @@ import MiniGame from './components/MiniGame';
  * 3. Media Controls: handling autoplay blocks by starting audio on click events.
  * 4. DOM Reference with `useRef`: tracking audio tags directly.
  * 5. State Propagation: passing callbacks (`onUnlock`, `onBlown`, etc.) to children.
+ * 
+ * ✨ Every star tonight is yours — open to find out why 🌙💕
+ * This little page exists because of you.
+ * A small surprise, filled with big feelings.
+ * Every line here carries a little thought of you.
+ * Tonight, the stars, the music, and this little surprise all belong to you.
+ * A special surprise for the girl who makes my heart smile.
  */
 
-function Footer() {
+function Footer({ message, className = '' }) {
   return (
-    <footer className="footer">
+    <footer className={`footer ${className}`}>
       
       <p className="footer-message">
-        Some gifts are bought, but this one was built from my heart. 
+        {message}
       </p>
       <p className="footer-copy">
         © Designed and developed by JP, with 💖
@@ -57,19 +64,38 @@ export default function App() {
   // Ref referencing the HTML5 audio element
   const audioRef = useRef(null);
 
+  const getMusicForScreen = () => {
+    if (currentScreen === 'countdown' || currentScreen === 'login') {
+      return '/letter_2.mp3';
+    }
+
+    if (currentScreen === 'cake') {
+      return '/happy_birthday.mp3';
+    }
+
+    if (currentScreen === 'letter') {
+      return '/letter_1.mp3';
+    }
+
+    return '/letter_3.mp3';
+  };
+
+  const currentMusic = getMusicForScreen();
+
   // Sync music playing state with actual audio element
   useEffect(() => {
-    if (!audioRef.current) return;
+  if (!audioRef.current) return;
 
-    if (musicPlaying) {
-      audioRef.current.play().catch((err) => {
-        // Log warnings without crashing if music file is absent in public/
-        console.warn("Autoplay block or music file missing:", err);
-      });
-    } else {
-      audioRef.current.pause();
-    }
-  }, [musicPlaying]);
+  audioRef.current.load();
+
+  if (musicPlaying) {
+    audioRef.current.play().catch((err) => {
+      console.warn("Autoplay block or music file missing:", err);
+    });
+  } else {
+    audioRef.current.pause();
+  }
+}, [currentMusic, musicPlaying]);
 
   // Handle successful password entry
   const handleUnlockSurprise = () => {
@@ -103,7 +129,8 @@ export default function App() {
 
   const handleCountdownUnlocked = () => {
   setCurrentScreen('login');
-  };
+  setMusicPlaying(true);
+};
 
   return (
     <div 
@@ -118,14 +145,14 @@ export default function App() {
       {/* 2. Global Hidden Background Music Audio */}
       <audio
         ref={audioRef}
-        src="/music.mp3"
+        src={currentMusic}
         loop
         preload="auto"
       />
       
 
       {/* 3. Global Floating Music Controller */}
-      {currentScreen !== 'login' && (
+      
         <button
           className="music-toggle-btn"
           onClick={toggleMusic}
@@ -133,20 +160,16 @@ export default function App() {
         >
           {musicPlaying ? <FiMusic className="animate-pulse" /> : <FiVolumeX />}
         </button>
-      )}
+      
 
       {/* 4. Cinematic Stage Panels */}
 
       <div className={`screen-panel ${currentScreen === 'countdown' ? 'active' : ''}`}>
             <CountdownScreen onUnlocked={handleCountdownUnlocked} />
-            <footer className="footer login-footer">
-          <p className="footer-message">
-                Some gifts are bought, this one was built from the heart.
-          </p>
-          <p className="footer-copy">
-                © Designed and developed by JP, with 💖
-          </p>
-          </footer>
+            <Footer 
+            className="footer login-footer"
+            message = "A special surprise for the girl who makes my smile."
+          />
       </div>
       
       {/* Stage A: Login Gate */}
@@ -158,14 +181,11 @@ export default function App() {
               )}
           </div>
 
-          <footer className="footer login-footer">
-          <p className="footer-message">
-                Some gifts are bought, this one was built from the heart.
-          </p>
-          <p className="footer-copy">
-                © Designed and developed by JP, with 💖
-          </p>
-          </footer>
+          <Footer 
+            className="footer login-footer"
+            message = "This little page exists because of you."
+          />
+
         </div>
       </div>
 
@@ -180,7 +200,10 @@ export default function App() {
               />
             )}
           </div>
-          <Footer />
+          <Footer 
+            className="footer"
+            message = "Tonight, the stars, the music, and this little surprise all belong to you."
+          />
         </div>
       </div>
 
@@ -192,7 +215,10 @@ export default function App() {
               <LetterSection onNext={handleUnlockMainContent} />
             )}
           </div>
-          <Footer />
+          <Footer 
+            className="footer"
+            message = "Some gifts are bought, but this one was made from my heart."
+          />
         </div>
       </div>
 

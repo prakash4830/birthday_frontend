@@ -243,11 +243,12 @@ export default function LoginScreen({ onUnlock }) {
       </h1>
 
       <p className="countdown-unlocking">🎉 It's your birthday... unlocking your surprise...</p>
-
+      
+      
       <p className="countdown-hint">
-         
+        
       </p>
-
+          
       <div className="pin-display" aria-label="Password entry">
         {Array.from({ length: 4 }).map((_, index) => (
           <span key={index} className={`pin-dot ${password.length > index ? 'filled' : ''}`}>
