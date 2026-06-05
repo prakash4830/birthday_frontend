@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { FiMusic, FiVolumeX, FiHeart } from 'react-icons/fi';
+import { FiMusic, FiVolumeX} from 'react-icons/fi';
 
 // Import custom components with path
+import CountdownScreen from './components/CountdownScreen';
 import GalaxyBackground from './components/GalaxyBackground';
 import FloatingHearts from './components/FloatingHearts';
 import Roses from './components/Roses';
@@ -44,7 +45,7 @@ function Footer() {
 
 export default function App() {
   // Screen tracking state: 'login' -> 'cake' -> 'letter' -> 'mainContent'
-  const [currentScreen, setCurrentScreen] = useState('login');
+  const [currentScreen, setCurrentScreen] = useState('countdown');
   
   // Background music toggles
   const [musicPlaying, setMusicPlaying] = useState(false);
@@ -100,6 +101,10 @@ export default function App() {
     setMusicPlaying(!musicPlaying);
   };
 
+  const handleCountdownUnlocked = () => {
+  setCurrentScreen('login');
+  };
+
   return (
     <div 
       className="app-container"
@@ -117,6 +122,7 @@ export default function App() {
         loop
         preload="auto"
       />
+      
 
       {/* 3. Global Floating Music Controller */}
       {currentScreen !== 'login' && (
@@ -130,6 +136,18 @@ export default function App() {
       )}
 
       {/* 4. Cinematic Stage Panels */}
+
+      <div className={`screen-panel ${currentScreen === 'countdown' ? 'active' : ''}`}>
+            <CountdownScreen onUnlocked={handleCountdownUnlocked} />
+            <footer className="footer login-footer">
+          <p className="footer-message">
+                Some gifts are bought, this one was built from the heart.
+          </p>
+          <p className="footer-copy">
+                © Designed and developed by JP, with 💖
+          </p>
+          </footer>
+      </div>
       
       {/* Stage A: Login Gate */}
       <div className={`screen-panel ${currentScreen === 'login' ? 'active' : ''}`}>

@@ -264,13 +264,15 @@ export default function CakeScreen({ onBlown, onNext }) {
       <div className="romantic-greeting-container">
         
         <h1 className="sweetheart-text">Alles Gute zum Geburtstag, Sanchana! 💐💖 </h1>
+
       </div>
+
       )}
 
       {/* Next button — appears after candle blown */}
       {isBlown && (
         <button className="btn-romantic" style={{ marginTop: '2rem', maxWidth: '325px' }} onClick={onNext}>
-          🎁 Something special has been waiting for you 💌, Open it 💫
+          Something special has been waiting for you 💌, Open it 💫
         </button>
       )}
     </div>
