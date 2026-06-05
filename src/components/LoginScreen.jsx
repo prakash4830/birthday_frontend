@@ -234,9 +234,7 @@ export default function LoginScreen({ onUnlock }) {
   return (
     <div className="glass-card fade-in">
       <h1 className="countdown-name-static">
-        Welcome, Sanchu{' '}
-        <FiHeart
-          style={{
+        Welcome, Sanchu <FiHeart style={{
             fontSize: '2.3rem',
             color: 'var(--primary-pink)',
             filter: 'drop-shadow(0 0 8px rgba(255,94,132,0.6))'
