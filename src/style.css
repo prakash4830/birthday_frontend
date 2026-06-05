@@ -300,12 +300,11 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .footer-message {
-  font-family: var(--font-cursive);
+  font-family: var(--font-sherif);
   font-style: italic;
-  font-size: 1.8rem;
-  color: #ffd6e7;
+  font-size: 1.1rem;
+  color: #f8b2cf;
   text-shadow: 0 0 12px rgba(255, 94, 132, 0.18);
-  word-spacing: 6px;
 }
 .footer-first-letter {
   font-family: 'Playfair Display', serif;
@@ -1122,7 +1121,8 @@ body::-webkit-scrollbar-thumb:hover {
   background-size: 200% auto;
   animation: btnShimmer 2.5s linear infinite;
   letter-spacing: 1.5px;
-  font-family: var(--font-serif);
+  font-family: var(--font-sherif);
+  font-style: italic;
   font-size: 1rem;
 }
 
@@ -1267,8 +1267,9 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Great Vibes', cursive;
-  font-size: 22px;
+  font-family: 'cursive', cursive;
+  font-style: italic;
+  font-size: 20px;
   font-weight: 400;
   color: rgba(255, 245, 245, 0.98);
   text-shadow: 
@@ -2022,7 +2023,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 
 .sweetheart-text {
-  font-family: 'Great Vibes', serif;
+  font-family: 'Great Vibes', cursive;
   font-size: clamp(2rem, 7vw, 3.5rem);
   font-weight: 700;
   color: #ff5e84;
@@ -2385,7 +2386,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .countdown-name-static {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.8rem, 10vw, 4.2rem);
+  font-size: 4.5rem;
   font-weight: 700;
   color: #ff5e84;
   text-shadow:

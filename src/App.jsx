@@ -168,7 +168,7 @@ export default function App() {
             <CountdownScreen onUnlocked={handleCountdownUnlocked} />
             <Footer 
             className="footer login-footer"
-            message = "A special surprise for the girl who makes my smile."
+            message = "A special surprise for the girl who makes me smile."
           />
       </div>
       
