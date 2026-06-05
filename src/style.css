@@ -1269,7 +1269,7 @@ body::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   font-family: 'cursive', cursive;
   font-style: italic;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 400;
   color: rgba(255, 245, 245, 0.98);
   text-shadow: 
@@ -1433,6 +1433,62 @@ body::-webkit-scrollbar-thumb:hover {
   border-radius: 0 0 12px 12px;
   transform: rotateX(0deg);
 }
+.letter-fold,
+.letter-center,
+.letter-paper {
+  background: linear-gradient(180deg, #fcf5e5 0%, #f6eee3 55%, #e5cbba 100%);
+  border: 1px solid rgba(140, 90, 40, 0.18);
+  box-shadow:
+    0 8px 20px rgba(101, 67, 33, 0.12),
+    inset 0 0 30px rgba(181, 137, 76, 0.08);
+}
+.letter-center {
+  background:
+    radial-gradient(circle at center, rgba(255, 250, 235, 0.92) 0%, rgba(242, 226, 190, 0.96) 100%),
+    linear-gradient(180deg, #fcf5e5 0%, #f6eee3 60%, #e5cbba 100%);
+}
+.letter-text {
+  color: #4e342e;
+}
+
+.letter-paper {
+  position: relative;
+}
+
+.letter-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(156, 63, 116, 0.12);
+  color: #8b2f63;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(80, 40, 30, 0.12);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.letter-close-btn:hover {
+  background: rgba(156, 63, 116, 0.2);
+  transform: scale(1.06);
+}
+
+.letter-close-btn:active {
+  transform: scale(0.96);
+}
+
+.letter-close-btn:focus-visible {
+  outline: 2px solid #9c3f74;
+  outline-offset: 2px;
+}
 
 .envelope-wrapper.open .letter-shell {
   position: fixed;
@@ -1486,6 +1542,48 @@ body::-webkit-scrollbar-thumb:hover {
   font-size: 0.95rem;
   line-height: 1.6;
   white-space: pre-line;
+}
+
+.letter-text {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #5a3a5a;
+  color: #334155;
+  white-space: pre-line;
+}
+
+.letter-line {
+  margin-bottom: 1.1rem;
+}
+
+.letter-para {
+  text-align: justify;
+  text-indent: 2.2em;
+}
+
+.letter-quote {
+  text-align: center;
+  text-indent: 0;
+  font-style: italic;
+  white-space: pre-line;
+  color: #9c3f74;
+  margin: 1.5rem auto;
+  max-width: 85%;
+  line-height: 1.8;
+}
+
+.letter-signature {
+  text-align: right;
+  text-indent: 0;
+  white-space: pre-line;
+  margin-top: 2rem;
+  margin-left: auto;
+  max-width: 220px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #334155;
 }
 
 /* --- 4. Love Counter --- */
