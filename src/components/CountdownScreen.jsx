@@ -9,7 +9,7 @@ const BIRTHDAY_TIME = new Date('2026-06-23T18:30:00.000Z');
 const DEV_BYPASS = true;
 
 // Delay after countdown completes before moving to login
-const POST_COUNTDOWN_DELAY = 100; // 1 second
+const POST_COUNTDOWN_DELAY = 1000; // 1 second
 
 function pad(n) {
   return String(n).padStart(2, '0');
