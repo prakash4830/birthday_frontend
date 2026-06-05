@@ -302,7 +302,7 @@ body::-webkit-scrollbar-thumb:hover {
 .footer-message {
   font-family: var(--font-sherif);
   font-style: italic;
-  font-size:0.85rem;
+  font-size:1.1rem;
   color: #f8b2cf;
   text-shadow: 0 0 12px rgba(255, 94, 132, 0.18);
 }
