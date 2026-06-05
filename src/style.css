@@ -302,7 +302,7 @@ body::-webkit-scrollbar-thumb:hover {
 .footer-message {
   font-family: var(--font-sherif);
   font-style: italic;
-  font-size: 1.1rem;
+  font-size:0.85rem;
   color: #f8b2cf;
   text-shadow: 0 0 12px rgba(255, 94, 132, 0.18);
 }
@@ -1118,12 +1118,12 @@ body::-webkit-scrollbar-thumb:hover {
 .btn-romantic {
   /* ADD these new lines to existing btn-romantic */
   background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #fb923c 100%);
-  background-size: 200% auto;
+  background-size: 100% auto;
   animation: btnShimmer 2.5s linear infinite;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   font-family: var(--font-sherif);
   font-style: italic;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 @keyframes btnShimmer {
@@ -2386,7 +2386,7 @@ body::-webkit-scrollbar-thumb:hover {
 
 .countdown-name-static {
   font-family: 'Great Vibes', cursive;
-  font-size: 4.5rem;
+  font-size: clamp(2.8rem, 10vw, 4.2rem);
   font-weight: 700;
   color: #ff5e84;
   text-shadow:
