@@ -1118,12 +1118,12 @@ body::-webkit-scrollbar-thumb:hover {
 .btn-romantic {
   /* ADD these new lines to existing btn-romantic */
   background: linear-gradient(135deg, #f472b6 0%, #c084fc 50%, #fb923c 100%);
-  background-size: 100% auto;
+  background-size: 200% auto;
   animation: btnShimmer 2.5s linear infinite;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   font-family: var(--font-sherif);
   font-style: italic;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
 @keyframes btnShimmer {
@@ -1269,7 +1269,7 @@ body::-webkit-scrollbar-thumb:hover {
   justify-content: center;
   font-family: 'cursive', cursive;
   font-style: italic;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 400;
   color: rgba(255, 245, 245, 0.98);
   text-shadow: 
