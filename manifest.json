@@ -1,0 +1,16 @@
+{
+  "short_name": "MyLove",
+  "name": "Happy Birthday, My Love!",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#1a0b2e",
+  "theme_color": "#1a0b2e",
+  "display": "standalone",
+  "orientation": "portrait"
+}
