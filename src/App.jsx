@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiMusic, FiVolumeX, FiHeart } from 'react-icons/fi';
 
-// Import custom components
+// Import custom components with path
 import GalaxyBackground from './components/GalaxyBackground';
 import FloatingHearts from './components/FloatingHearts';
 import Roses from './components/Roses';
