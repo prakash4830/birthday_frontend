@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FiHeart } from 'react-icons/fi';
 
 // 23 June 2026, 12:00 AM IST = 22 June 2026, 6:30 PM UTC
-const BIRTHDAY_TIME = new Date('2026-06-23T18:30:00.000Z');
-//const BIRTHDAY_TIME = new Date(Date.now() + 5 * 1000);
+// const BIRTHDAY_TIME = new Date('2026-06-23T18:30:00.000Z');
+const BIRTHDAY_TIME = new Date(Date.now() + 10 * 1000);
 
 // Testing only
-const DEV_BYPASS = true;
+const DEV_BYPASS = false;
 
 // Delay after countdown completes before moving to login
-const POST_COUNTDOWN_DELAY = 1000; // 1 second
+const POST_COUNTDOWN_DELAY = 7000; // 1 second
 
 function pad(n) {
   return String(n).padStart(2, '0');
