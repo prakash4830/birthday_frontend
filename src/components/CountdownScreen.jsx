@@ -146,7 +146,7 @@ export default function CountdownScreen({ onUnlocked, onFirstTap, audioUnlocked 
           </>
         ) : (
           <>
-            <p className="countdown-unlocking">🎉 It's your birthday... unlocking your surprise...</p>
+            <p className="countdown-unlocking">🎉 unlocking your surprise, please wait for a moment...</p>
             <p className="countdown-hint">
               Preparing something beautiful for you 💖
             </p>
