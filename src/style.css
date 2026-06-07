@@ -2527,6 +2527,89 @@ body::-webkit-scrollbar-thumb:hover {
   animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.countdown-card {
+  position: relative;
+}
+
+.countdown-audio-prompt-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: calc(100% - 40px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.countdown-audio-prompt {
+  pointer-events: auto;
+  min-height: 52px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.countdown-audio-prompt:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 14px 34px rgba(0, 0, 0, 0.3),
+    0 0 18px rgba(255, 94, 132, 0.15);
+}
+
+.countdown-audio-prompt:active {
+  transform: translateY(0);
+}
+
+.countdown-audio-prompt:focus-visible {
+  outline: 2px solid rgba(255, 94, 132, 0.9);
+  outline-offset: 3px;
+}
+
+.countdown-audio-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.countdown-audio-copy {
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .countdown-audio-prompt-wrap {
+    bottom: 20px;
+    width: calc(100% - 28px);
+  }
+
+  .countdown-audio-prompt {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 13px 16px;
+  }
+
+  .countdown-audio-copy {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(32px); }
   to   { opacity: 1; transform: translateY(0); }

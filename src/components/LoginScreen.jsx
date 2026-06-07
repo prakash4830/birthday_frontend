@@ -242,7 +242,7 @@ export default function LoginScreen({ onUnlock }) {
         />
       </h1>
 
-      <p className="countdown-unlocking">🎉 It's your birthday... unlocking your surprise...</p>
+      <p className="countdown-unlocking">🎉 It's your birthday... unlock your surprise...</p>
       
       
       <p className="countdown-hint">

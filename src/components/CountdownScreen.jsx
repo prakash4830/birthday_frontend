@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FiHeart } from 'react-icons/fi';
 
-// 23 June 2026, 12:00 AM IST = 22 June 2026, 6:30 PM UTC
-// const BIRTHDAY_TIME = new Date('2026-06-23T18:30:00.000Z');
-const BIRTHDAY_TIME = new Date(Date.now() + 10 * 1000);
+// const BIRTHDAY_TIME = new Date('2026-06-07T18:30:00.000Z');
+const BIRTHDAY_TIME = new Date(Date.now() + 20 * 1000);
 
-// Testing only
 const DEV_BYPASS = false;
-
-// Delay after countdown completes before moving to login
-const POST_COUNTDOWN_DELAY = 7000; // 1 second
+const POST_COUNTDOWN_DELAY = 6000;
 
 function pad(n) {
   return String(n).padStart(2, '0');
@@ -29,19 +25,19 @@ function getTimeLeft() {
   return { days, hours, minutes, seconds };
 }
 
-export default function CountdownScreen({ onUnlocked }) {
+export default function CountdownScreen({ onUnlocked, onFirstTap, audioUnlocked }) {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft());
   const [isWaitingToUnlock, setIsWaitingToUnlock] = useState(false);
 
   useEffect(() => {
+    let unlockTimer = null;
+
     const initial = getTimeLeft();
 
-    // If user comes after countdown is already complete,
-    // still show delay before moving to login
     if (!initial) {
       setIsWaitingToUnlock(true);
 
-      const unlockTimer = setTimeout(() => {
+      unlockTimer = setTimeout(() => {
         onUnlocked();
       }, POST_COUNTDOWN_DELAY);
 
@@ -56,23 +52,50 @@ export default function CountdownScreen({ onUnlocked }) {
         clearInterval(timer);
         setIsWaitingToUnlock(true);
 
-        const unlockTimer = setTimeout(() => {
+        unlockTimer = setTimeout(() => {
           onUnlocked();
         }, POST_COUNTDOWN_DELAY);
-
-        return () => clearTimeout(unlockTimer);
       }
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (unlockTimer) clearTimeout(unlockTimer);
+    };
   }, [onUnlocked]);
 
   return (
     <div className="countdown-shell">
       <div className="countdown-card">
+        {!audioUnlocked && (
+          <div className="countdown-audio-prompt-wrap">
+            <button
+              type="button"
+              className="countdown-audio-prompt"
+              onClick={onFirstTap}
+              aria-label="Tap to begin the surprise with music"
+            >
+              <span className="countdown-audio-icon">🎵</span>
+              <span className="countdown-audio-copy">
+                Tap to unmute
+              </span>
+            </button>
+          </div>
+        )}
+
+
+
         <p className="countdown-label-top">Something special is waiting for you</p>
 
-        <h1 className="countdown-name">Sanchu <FiHeart style={{ fontSize: '2.3rem', color: 'var(--primary-pink)', filter: 'drop-shadow(0 0 8px rgba(255,94,132,0.6))' }} />
+        <h1 className="countdown-name">
+          Sanchu{' '}
+          <FiHeart
+            style={{
+              fontSize: '2.3rem',
+              color: 'var(--primary-pink)',
+              filter: 'drop-shadow(0 0 8px rgba(255,94,132,0.6))'
+            }}
+          />
         </h1>
 
         <div className="countdown-divider" />
