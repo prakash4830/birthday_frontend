@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
+import { FiChevronLeft, FiHeart } from 'react-icons/fi';
 
-export default function LetterSection({ onNext }) {
+
+export default function LetterSection({ onNext, onBack }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasBeenOpened, setHasBeenOpened] = useState(false);
 
   const openLetter = (e) => {
     if (e) e.stopPropagation();
     setIsOpen(true);
+    setHasBeenOpened(true);
   };
 
   const closeLetter = (e) => {
     if (e) e.stopPropagation();
     setIsOpen(false);
   };
+
 
   const letterContent = [
     {
@@ -88,6 +93,12 @@ export default function LetterSection({ onNext }) {
         alignItems: 'center'
       }}
     >
+      <button className="letter-back-btn" onClick={onBack} aria-label="Go back">
+        <FiChevronLeft size={16} />
+        <FiHeart size={13} style={{ color: 'var(--primary-pink)' }} />
+        
+      </button>
+
       <div
         className={`envelope-wrapper ${isOpen ? 'open' : ''}`}
         aria-label="Interactive Envelope"
@@ -161,7 +172,6 @@ export default function LetterSection({ onNext }) {
           </div>
         </div>
       </div>
-
       <p
         style={{
           color: 'var(--text-muted)',
@@ -172,9 +182,16 @@ export default function LetterSection({ onNext }) {
         }}
       >
         {isOpen
-          ? '💌 Click the X to fold it back'
+          ? 'Click the X to fold it back'
           : 'Tap the seal to read the letter'}
       </p>
+
+      {hasBeenOpened && !isOpen && (
+        <button className="btn-romantic letter-next-btn" onClick={onNext}>
+          Do you want to see how it was made? (BTS)
+        </button>
+      )}
+      
     </div>
   );
 }

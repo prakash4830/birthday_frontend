@@ -127,6 +127,19 @@ export default function App() {
     setCurrentScreen('login');
   }, []);
 
+  const handleBackToCake = useCallback(() => {
+    setCurrentScreen('cake');
+  }, []);
+
+  // Add 'video' to your screen flow: letter → video → mainContent
+  const handleNextToVideo = useCallback(() => {
+    setCurrentScreen('video');
+  }, []);
+
+  const handleVideoNext = useCallback(() => {
+    setCurrentScreen('mainContent');
+  }, []);
+
   return (
     <div
       className="app-container"
@@ -189,7 +202,7 @@ export default function App() {
         <div className="screen-page-shell">
           <div className="screen-page-content">
             {currentScreen === 'letter' && (
-              <LetterSection onNext={handleUnlockMainContent} />
+              <LetterSection onNext={handleNextToVideo} onBack={handleBackToCake}/>
             )}
           </div>
           <Footer
@@ -198,6 +211,22 @@ export default function App() {
           />
         </div>
       </div>
+
+      {/* Stage D: Video Section */}
+      <div className={`screen-panel ${currentScreen === 'video' ? 'active' : ''}`}>
+        <div className="screen-page-shell">
+          <div className="screen-page-content">
+            {currentScreen === 'video' && (
+              <VideoSection onNext={handleVideoNext} onBack={() => setCurrentScreen('letter')}/>
+              )}
+          </div>
+          <Footer
+          className="footer"
+          message="Every fold, every word, and every second of this was made just for you"
+        />
+        </div>
+      </div>
+
 
       {showFireworks && <Fireworks />}
     </div>

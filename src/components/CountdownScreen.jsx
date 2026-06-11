@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiHeart } from 'react-icons/fi';
 
-// const BIRTHDAY_TIME = new Date('2026-06-07T18:30:00.000Z');
+ // const BIRTHDAY_TIME = new Date('2026-06-07T18:30:00.000Z');
 const BIRTHDAY_TIME = new Date(Date.now() + 30 * 1000);
 
 const DEV_BYPASS = false;
