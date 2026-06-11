@@ -45,6 +45,9 @@ export default function App() {
     if (currentScreen === 'letter') {
       return '/letter_1.mp3';
     }
+    if (currentScreen === 'video') {
+      return '/video_bg_music.mp3';
+    }
     return '/letter_3.mp3';
   };
 
