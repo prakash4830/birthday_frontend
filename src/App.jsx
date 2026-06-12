@@ -32,6 +32,7 @@ export default function App() {
   const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [hideBackgrounds, setHideBackgrounds] = useState(false);
   const [showFireworks, setShowFireworks] = useState(false);
+  const [musicMuted, setMusicMuted] = useState(false);
 
   const audioRef = useRef(null);
 
@@ -55,30 +56,46 @@ export default function App() {
 
   useEffect(() => {
     if (!audioRef.current) return;
+    audioRef.current.muted = musicMuted;
+  }, [musicMuted]);
 
-    audioRef.current.load();
+  useEffect(() => {
+    if (!audioRef.current) return;
+    if (!audioUnlocked) return;
 
-    if (musicPlaying && audioUnlocked) {
-      audioRef.current.play().catch((err) => {
+    const audio = audioRef.current;
+    const wasMuted = audio.muted;
+    const nextSrc = currentMusic;
+
+    if (audio.getAttribute('src') !== nextSrc) {
+      audio.src = nextSrc;
+      audio.load();
+    }
+
+    audio.muted = wasMuted;
+
+    audio
+      .play()
+      .then(() => {
+        setMusicPlaying(true);
+      })
+      .catch((err) => {
         console.warn('Autoplay block or music file missing:', err);
       });
-    } else {
-      audioRef.current.pause();
-    }
-  }, [currentMusic, musicPlaying, audioUnlocked]);
+  }, [currentMusic, audioUnlocked]);
 
   const unlockAudio = useCallback(async () => {
     if (!audioRef.current || audioUnlocked) return;
 
     try {
-      audioRef.current.muted = false;
+      audioRef.current.muted = musicMuted;
       await audioRef.current.play();
       setMusicPlaying(true);
       setAudioUnlocked(true);
     } catch (err) {
       console.warn('Audio unlock failed:', err);
     }
-  }, [audioUnlocked]);
+  }, [audioUnlocked, musicMuted]);
 
   const handleUnlockSurprise = useCallback(() => {
     setCurrentScreen('cake');
@@ -111,20 +128,18 @@ export default function App() {
         await audioRef.current.play();
         setAudioUnlocked(true);
         setMusicPlaying(true);
+        setMusicMuted(false);
         return;
       }
 
-      if (musicPlaying) {
-        audioRef.current.pause();
-        setMusicPlaying(false);
-      } else {
-        await audioRef.current.play();
-        setMusicPlaying(true);
-      }
+      const nextMuted = !audioRef.current.muted;
+      audioRef.current.muted = nextMuted;
+      setMusicMuted(nextMuted);
+      setMusicPlaying(true);
     } catch (err) {
       console.warn('Music toggle failed:', err);
     }
-  }, [audioUnlocked, musicPlaying]);
+  }, [audioUnlocked]);
 
   const handleCountdownUnlocked = useCallback(() => {
     setCurrentScreen('login');
@@ -134,7 +149,6 @@ export default function App() {
     setCurrentScreen('cake');
   }, []);
 
-  // Add 'video' to your screen flow: letter → video → mainContent
   const handleNextToVideo = useCallback(() => {
     setCurrentScreen('video');
   }, []);
@@ -154,13 +168,15 @@ export default function App() {
 
       <audio ref={audioRef} src={currentMusic} loop preload="auto" />
 
-      <button
-        className="music-toggle-btn"
-        onClick={toggleMusic}
-        aria-label={musicPlaying ? 'Mute Background Music' : 'Play Background Music'}
-      >
-        {musicPlaying ? <FiMusic className="animate-pulse" /> : <FiVolumeX />}
-      </button>
+      {currentScreen !== 'video' && (
+        <button
+          className="music-toggle-btn"
+          onClick={toggleMusic}
+          aria-label={musicMuted ? 'Unmute music' : 'Mute music'}
+        >
+          {musicMuted ? <FiVolumeX /> : <FiMusic />}
+        </button>
+      )}
 
       <div className={`screen-panel ${currentScreen === 'countdown' ? 'active' : ''}`}>
         <CountdownScreen
@@ -205,7 +221,7 @@ export default function App() {
         <div className="screen-page-shell">
           <div className="screen-page-content">
             {currentScreen === 'letter' && (
-              <LetterSection onNext={handleNextToVideo} onBack={handleBackToCake}/>
+              <LetterSection onNext={handleNextToVideo} onBack={handleBackToCake} />
             )}
           </div>
           <Footer
@@ -215,21 +231,22 @@ export default function App() {
         </div>
       </div>
 
-      {/* Stage D: Video Section */}
       <div className={`screen-panel ${currentScreen === 'video' ? 'active' : ''}`}>
         <div className="screen-page-shell">
           <div className="screen-page-content">
             {currentScreen === 'video' && (
-              <VideoSection onNext={handleVideoNext} onBack={() => setCurrentScreen('letter')}/>
-              )}
+              <VideoSection
+                onNext={handleVideoNext}
+                onBack={() => setCurrentScreen('letter')}
+              />
+            )}
           </div>
           <Footer
-          className="footer"
-          message="Every fold, every word, and every second of this was made just for you"
-        />
+            className="footer"
+            message="Every fold, every word, and every second of this was made just for you"
+          />
         </div>
       </div>
-
 
       {showFireworks && <Fireworks />}
     </div>

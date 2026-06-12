@@ -2949,11 +2949,11 @@ body::-webkit-scrollbar-thumb:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
   padding: 14px 16px;
   background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .reel-control-btn {
@@ -2999,3 +2999,204 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
+/* ==========================================================================
+   END OF MAIN STYLESHEET
+   ========================================================================== */
+.reel-controls-advanced {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.reel-progress-section {
+  width: 100%;
+}
+
+.reel-buttons-row > * {
+  flex-shrink: 0;
+}
+
+.reel-controls-advanced.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.reel-controls-advanced.is-hidden {
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+}
+
+.reel-progress-section {
+  width: 100%;
+}
+
+.reel-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  cursor: pointer;
+  overflow: visible;
+}
+
+.reel-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary-pink), var(--secondary-purple));
+}
+
+.reel-progress-thumb {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 94, 132, 0.45);
+  transform: translate(-50%, -50%);
+}
+
+.reel-time-row {
+  margin-top: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.reel-buttons-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+
+.reel-skip-btn {
+  padding: 0;
+}
+
+.reel-skip-icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+}
+
+.reel-control-btn:hover .reel-skip-icon {
+  color: var(--primary-pink);
+}
+
+.reel-volume-group {
+  position: relative;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.reel-volume-popover {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 30;
+}
+
+.reel-volume-group:hover .reel-volume-popover,
+.reel-volume-group:focus-within .reel-volume-popover {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.reel-volume-popover-inner {
+  padding: 12px 10px;
+  border-radius: 16px;
+  background: rgba(16, 10, 24, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* vertical volume slider */
+.reel-volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 4px;
+  height: 96px;
+  writing-mode: bt-lr;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* webkit */
+.reel-volume-slider::-webkit-slider-runnable-track {
+  width: 4px;
+  height: 96px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+
+.reel-volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-pink);
+  box-shadow: 0 0 12px rgba(255, 94, 132, 0.28);
+  margin-left: -5px;
+}
+
+/* firefox */
+.reel-volume-slider::-moz-range-track {
+  width: 4px;
+  height: 96px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+}
+
+.reel-volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--primary-pink);
+  box-shadow: 0 0 12px rgba(255, 94, 132, 0.28);
+}
+
+@media (max-width: 480px) {
+  .reel-buttons-row {
+    gap: 6px;
+  }
+
+  .reel-time-row {
+    font-size: 0.72rem;
+  }
+
+  .reel-progress-thumb {
+    width: 10px;
+    height: 10px;
+  }
+
+  .reel-volume-slider,
+  .reel-volume-slider::-webkit-slider-runnable-track,
+  .reel-volume-slider::-moz-range-track {
+    height: 80px;
+  }
+}

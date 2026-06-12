@@ -185,12 +185,13 @@ export default function LetterSection({ onNext, onBack }) {
           ? 'Click the X to fold it back'
           : 'Tap the seal to read the letter'}
       </p>
-
+      {/*}
       {hasBeenOpened && !isOpen && (
         <button className="btn-romantic letter-next-btn" onClick={onNext}>
           Do you want to see how it was made? (BTS)
         </button>
       )}
+      **/}
       
     </div>
   );
